@@ -54,8 +54,7 @@ def build_campaign( data: dataContainer.sheetContainer, campaign: str, config: c
     for row in output:
         pass
 
-    for x in output:
-        print(*x, sep=' ')
+    tools.to_xlsx(output)
 
 def main():
 

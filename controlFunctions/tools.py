@@ -2,6 +2,15 @@ from operator import index
 from os import path, chdir
 import sys
 import pandas as pd
+import xlsxwriter
+
+def to_xlsx(new_list):
+    
+    with xlsxwriter.Workbook('test.xlsx') as workbook:
+        worksheet = workbook.add_worksheet()
+
+        for row_num, data in enumerate(new_list):
+            worksheet.write_row(row_num, 0, data)
 
 def deleteNaN(mylist):
     newlist = [x for x in mylist if pd.isnull(x) == False]
