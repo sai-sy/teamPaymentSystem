@@ -1,7 +1,8 @@
 from pandas import DataFrame, Series
-from controlFunctions import tools, constants
+from controlFunctions import tools, constants, exceptions
 from objects import config, volunteer, dataContainer
 from datetime import date
+from xlsxwriter.exceptions import FileCreateError
 
 def build_campaign( data: dataContainer.sheetContainer, campaign: str, config: config.Config):
     dataParsed = data.parse_campaign(campaign)
@@ -37,24 +38,28 @@ def build_campaign( data: dataContainer.sheetContainer, campaign: str, config: c
                 row.append(round(uniqueVolunteer.earned[uniqueCampaign], 2))                
             except KeyError:
                 row.append(0)
-                continue
             try:
                 row.append(round(uniqueVolunteer.paid[uniqueCampaign], 2))
             except KeyError:
                 row.append(0)
-                continue
             try:
                 row.append(round(uniqueVolunteer.owed[uniqueCampaign], 2))
             except KeyError:
                 row.append(0)
-                continue
         output.append(row)
             
 
     for row in output:
         pass
 
-    tools.to_xlsx(output)
+    while(True):
+        try:
+            tools.to_xlsx(output)
+        except FileCreateError:
+            print('Please Close Previous Output!')
+            input('Type when youre done: ')
+            continue
+        break
 
 def main():
 
@@ -72,14 +77,14 @@ def main():
         
         print('\n- Build a report | build\n- View one persons data | view\n- Exit the program | quit')
         userChoice = input('What would you like to do: ')
-        if userChoice == 'build' or 'b' or 'Build':
+        if userChoice== 'quit' or 'q' or 'Quit':
+            pass
+        elif userChoice == 'build' or 'b' or 'Build':
             while(True):
                 userChoice = input('\nWhich campaign would you want to report or all: ')
                 build_campaign(totalData, userChoice, _configData)
         elif userChoice == 'view' or 'v' or 'View':
             pass
-        elif userChoice == 'quit' or 'q' or 'Quit':
-            break
         else:
             print('Error Invalid Input | Please select one of the given values\n\n')
 

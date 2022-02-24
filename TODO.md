@@ -4,10 +4,11 @@ To-Do for whole project
 
 ## Project
 ~
-- [ ] Every use of a constant change to using a getter from constants.py
-    - [x] Make constants.py have getters
+- [ ] output completion text
 - [ ] Return type and document all the functions
-- [ ] FileCreateError
+- [ ] Print data after creating output
+- [ ] Print Each Volunteer
+- [ ] Finish quits
 
 
 # Backlog
@@ -22,4 +23,7 @@ To-Do for whole project
 - [x] if name else for module management
 - [x] Complete Build Report
  - [x] How To Make Report
- - [X] How To Structure Data
+ - [x] How To Structure Data
+- [x] FileCreateError
+- [x] Every use of a constant change to using a getter from constants.py
+    - [x] Make constants.py have getters

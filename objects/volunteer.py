@@ -46,11 +46,10 @@ class Volunteer(object):
         self.phone = self.parsedTeam.iloc[0]['phone']
         self.campaign = self.parsedTeam.iloc[0]['campaign']
 
-        hoursCampaigns = tools.returnUniqueValues(hoursData, 'campaign')
-        abstractCampaigns = tools.returnUniqueValues(abstractsData, 'campaign')
-        paymentCampaigns = tools.returnUniqueValues(paymentData, 'campaign')
-        
-        temp = list(dict.fromkeys(paymentCampaigns + abstractCampaigns))
+        hoursCampaigns = tools.returnUniqueValues(self.parsedHours, 'campaign')
+        abstractCampaigns = tools.returnUniqueValues(self.parsedAbstracts, 'campaign')
+        paymentCampaigns = tools.returnUniqueValues(self.parsedPayment, 'campaign')
+
         workedOnCampaigns = list(dict.fromkeys(hoursCampaigns + paymentCampaigns + abstractCampaigns))
 
         for campaign in workedOnCampaigns:
@@ -58,7 +57,7 @@ class Volunteer(object):
             self.minutes[campaign] = df['minutes'].sum()
             if not campaign in self.earned.keys():
                 self.earned[campaign] = 0
-            self.earned[campaign] += self.minutes[campaign] * (configData.get_minute_rate) 
+            self.earned[campaign] += self.minutes[campaign] * (configData.get_minute_rate()) 
             
         for campaign in workedOnCampaigns:
             df = self.parsedAbstracts.loc[self.parsedAbstracts['campaign'] == campaign]
