@@ -58,7 +58,7 @@ class Volunteer(object):
             self.minutes[campaign] = df['minutes'].sum()
             if not campaign in self.earned.keys():
                 self.earned[campaign] = 0
-            self.earned[campaign] += self.minutes[campaign] * (configData.get_hourly_rate() / 60) 
+            self.earned[campaign] += self.minutes[campaign] * (configData.get_minute_rate) 
             
         for campaign in workedOnCampaigns:
             df = self.parsedAbstracts.loc[self.parsedAbstracts['campaign'] == campaign]

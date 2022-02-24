@@ -29,7 +29,11 @@ class Config(object):
             else:
                 splitLine = lineArr[index].split()
                 self.hourly_rate = int(splitLine[1])
+                self.minute_rate = self.hourly_rate / 60
                 self.commission_tracker[splitLine[0]] = tuple(splitLine[2:])
 
     def get_hourly_rate(self):
         return self.hourly_rate
+    
+    def get_minute_rate(self):
+        return self.minute_rate
