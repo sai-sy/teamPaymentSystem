@@ -5,6 +5,7 @@ class Config(object):
 
     teamDataFilename: str = field(init=False)
     hourly_rate: int = field(init=False)
+    minute_rate: int = field(init=False)
     commission_tracker: dict = field(init=False, default_factory=dict)
     filename: InitVar[str]
 
